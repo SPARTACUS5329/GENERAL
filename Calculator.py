@@ -28,7 +28,7 @@ class Stack:
         return len(self.items)
 
 class Expr:
-    priorityOfOperations = {'+': 0, '-': 0, '*': 1, '/': 1}
+    priorityOfOperations = {'+': 0, '-': 0, '*': 1, '/': 1, '^': 2}
     stack = Stack()
     postfix = ''
     cycle = 0
@@ -107,6 +107,8 @@ class Expr:
                     self.stack.push(Times(l, r).eval())
                 elif i == "/":
                     self.stack.push(Divide(l, r).eval())
+                elif i == '^':
+                    self.stack.push(Exponent(l, r).eval())
                 else:
                     raise "What the hell is happening?"
         return self.stack.peek()
@@ -155,6 +157,17 @@ class Minus(Expr):
     def eval(self):
         return self.l-self.r
 
+class Exponent(Expr):
+    def __init__(self, base, exponent):
+        self.b = float(base)
+        self.e = float(exponent)
+    
+    def __str__(self):
+        return f"{self.b}^{self.e}"
+
+    def eval(self):
+        return self.b**self.e
+        
 class Const(Expr):
     def __init__(self, val):
         self.val = val
