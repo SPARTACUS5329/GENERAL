@@ -9,8 +9,11 @@
             V0.13-->Changed binary conversion functions and more number system conversions
             V0.20-->Added data structures Stack and Queue
             V0.21-->Added one liner binay search function
+            V0.22-->Added creating of immutable classes to pass by value and not by reference
 """
 
+#For creating an immutable class
+import inspect
 
 #checking if a number is prime
 prime_check = lambda x: True if not len([i for i in range(2,int(x**0.5)+1) if not x%i and x!=i]) else False
@@ -108,6 +111,18 @@ class Queue:
     
     def rear(self): 
         return self.items.pop(-1) if not self.isEmpty() else None
+
+
+#Creating an immutable class for passing parameters by value
+class Immutable(object):
+    def __init__(self, x):
+        self.x = x
+
+    def __setattr__(self, *args):
+        if inspect.stack()[1][3] == '__init__':
+            object.__setattr__(self, *args)
+        else:
+            raise TypeError('Cannot modify immutable instance')
 
 #binary_search of a sorted list    
 bin_search = lambda arr,x: True if (len(arr)==1 and arr[0]==x) else False if (len(arr)==1 and arr[0]!=x) else bin_search(arr[len(arr)//2:],x) if x>=arr[len(arr)//2] else bin_search(arr[:len(arr)//2],x)
