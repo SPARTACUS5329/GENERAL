@@ -63,4 +63,3 @@ if __name__ == "__main__":
     N = int(input("Enter N for NxN matrix: "))
     matrix = Matrix(N)
     print(f"{matrix.determinant()} is the determinant of this matrix")
-    print(f"{matrix.determinant()-matrix.transpose().determinant()} is a simple check to see the determinant works. Because det(A) = det(transpose(A))")
