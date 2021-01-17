@@ -204,3 +204,7 @@ SPARTACUS.bbuff += 1
 SPARTACUS.bbuff += 1
 SPARTACUS.bbuff += 1
 SPARTACUS.coins+=10
+TestUser=Player("TestUser","0x44bf764093d0e49a35aa57")
+userlist["TestUser"]=TestUser
+SPARTACUS.colour = "#00f"
+SPARTACUS.coins+=12

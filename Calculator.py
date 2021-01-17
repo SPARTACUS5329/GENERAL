@@ -1,3 +1,6 @@
+from tkinter import *
+
+
 class Stack:
     def __init__(self):
         self.items = []
@@ -186,10 +189,26 @@ class Var(Expr):
         return self.name
 
     def eval(self, exp):
-        return exp[self.name]
+        return variableDict[self.name]
 
+def changeField(e):
+    expression = e.get()
+    calcultedText = Expr(expression).postfixCalculation()
+    e.delete(0,END)
+    e.insert(0,calcultedText)
+    return None
+    
+# variableDict = {}
 
+# expression = Expr(input("Enter the expression: "))
+# print(expression.expression)
+# print(expression.postfixCalculation())
 
-expression = Expr(input("Enter the expression: "))
-print(expression.expression)
-print(expression.postfixCalculation())
+root=Tk()
+frame = Frame(root)
+frame.pack()
+entryField = Entry(frame)
+entryField.pack()
+calculate = Button(frame, text = "Calculate", command = lambda: changeField(entryField))
+calculate.pack()
+root.mainloop()
